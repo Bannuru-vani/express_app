@@ -1,5 +1,7 @@
 # Express-Starter-With-JWT_Auth
-An express starter code and folder structure with JWT auth.
+An express starter code, folder structure, JWT authentication and Error Handling using express, MongodB, mongoose, jsonwebtoken, bcrypt.
+
+
 
 ## Available Scripts
 
@@ -13,7 +15,7 @@ In the project directory, you can run:
 │   server.js
 │   
 ├───  config
-│  	    config.env
+│       config.env
 │       db.js
 │       
 ├───  controllers
@@ -32,3 +34,6 @@ In the project directory, you can run:
 └───  utils
         httpError.js
  ```
+## Usage
+
+Clone the repo to get started quickly with functionality rather worrying about folder structure and authentication.
