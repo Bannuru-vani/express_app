@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
 const { connectDB } = require('./config/db');
 const app = express();
 const HttpError = require('./utils/httpError');
@@ -26,6 +28,12 @@ app.use((req, res, next) => {
 
 // Body Parser
 app.use(express.json());
+
+// Set secuity headers
+app.use(helmet());
+
+// Sanitize data
+app.use(mongoSanitize());
 
 //#region ~ ENV CONFIG ~
 require('dotenv').config({ path: './config/config.env' });
