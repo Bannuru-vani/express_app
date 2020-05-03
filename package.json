@@ -1,0 +1,31 @@
+{
+  "name": "jwt_auth",
+  "version": "1.0.0",
+  "description": "An jwt auth starter for node express",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "jwt",
+    "express",
+    "node",
+    "authantication",
+    "jwt",
+    "bcrypt"
+  ],
+  "author": "kc_Rahit",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
