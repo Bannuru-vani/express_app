@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
-const { connectDB } = require("./config/db");
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const { connectDB } = require('./config/db');
 const app = express();
-const HttpError = require("./utils/httpError");
-const errorHandler = require("./middlewares/error");
+const HttpError = require('./utils/httpError');
+const errorHandler = require('./middlewares/error');
 
 // #region ~ CORS ~
 
@@ -13,15 +13,15 @@ app.use(cors());
 // OR
 app.use((req, res, next) => {
   // Set the origin * to allow all domains or make it limited
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Origin', '*');
   // The headers which you use from front-end
   res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, Contrnt-Type,Accept",
-    "Authorization"
+    'Access-Control-Allow-Headers',
+    'Origin, Contrnt-Type,Accept',
+    'Authorization'
   );
   // Methods you use to contact with Backend
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE");
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE');
   next();
 });
 //#endregion
@@ -36,21 +36,21 @@ app.use(helmet());
 app.use(mongoSanitize());
 
 //#region ~ ENV CONFIG ~
-require("dotenv").config({ path: "./config/config.env" });
+require('dotenv').config({ path: './config/.env' });
 //#endregion
 
 connectDB();
 
 //#region ~ Routes ~
 
-app.use("/api/v1/auth", require("./routes/auth-routes"));
+app.use('/api/v1/auth', require('./routes/auth-routes'));
 
 //#endregion
 
 //#region ~ 404 - NO PAGE/ROUTE FOUND ~
 
 app.use((req, res, next) => {
-  throw new HttpError("Could not find this route", 404);
+  throw new HttpError('Could not find this route', 404);
 });
 
 //#endregion
@@ -63,7 +63,7 @@ const server = app.listen(PORT, () => {
 });
 
 // Handle unhandeled promise rejections
-process.on("unhandledRejection", (err, promise) => {
+process.on('unhandledRejection', (err, promise) => {
   console.log(`Error:${err.message}`);
   // Close sever & exit process
   server.close(() => process.exit(1));
