@@ -5,7 +5,6 @@ const User = require('../models/User');
 exports.authRoutes = asyncHandler(async (req, res, next) => {
   let token;
   let authorizationHeader = req.headers.authorization;
-
   if (authorizationHeader && authorizationHeader.startsWith('Bearer')) {
     token = authorizationHeader.split(' ')[1];
   }
