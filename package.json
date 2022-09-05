@@ -14,7 +14,7 @@
     "jwt",
     "bcrypt"
   ],
-  "author": "kc_Rahit",
+  "author": "vani",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^4.0.1",
