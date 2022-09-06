@@ -1,7 +1,7 @@
 {
-  "name": "jwt_auth",
+  "name": "mana_proj",
   "version": "1.0.0",
-  "description": "An jwt auth starter for node express",
+  "description": "Mana project",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
@@ -16,6 +16,9 @@
   ],
   "author": "vani",
   "license": "MIT",
+  "engines": {
+    "node": "14.19.0"
+  },
   "dependencies": {
     "bcrypt": "^4.0.1",
     "cors": "^2.8.5",
