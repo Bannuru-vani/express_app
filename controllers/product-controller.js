@@ -24,7 +24,7 @@ exports.addProduct = asyncHandler(async (req, res, next) => {
 
 //#region ~ GET - /api/v1/products - GET PRODUCTS - PRIVATE
 exports.getProducts = asyncHandler(async (req, res, next) => {
-  const items = await Product.find();
+  const items = await Product.find().select({ image: 1 });
   res.status(200).json(items);
 });
 //#endregion
