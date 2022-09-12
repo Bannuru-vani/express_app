@@ -10,6 +10,7 @@ const ProductSchema = mongoose.Schema({
   },
   slug: {
     type: String,
+    unique: true,
   },
   image: {
     type: String,

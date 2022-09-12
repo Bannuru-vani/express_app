@@ -24,8 +24,16 @@ exports.addProduct = asyncHandler(async (req, res, next) => {
 
 //#region ~ GET - /api/v1/products - GET PRODUCTS - PRIVATE
 exports.getProducts = asyncHandler(async (req, res, next) => {
-  const items = await Product.find().select({ image: 1 });
+  const items = await Product.find().select({ image: 1, slug: 1 });
   res.status(200).json(items);
+});
+//#endregion
+
+//#region ~ GET - /api/v1/products/:slug - GET Individual PRODUCT - PRIVATE
+exports.getProduct = asyncHandler(async (req, res, next) => {
+  const { slug } = req.params;
+  const item = await Product.find({ slug });
+  res.status(200).json(item[0]);
 });
 //#endregion
 
