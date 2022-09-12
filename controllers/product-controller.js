@@ -33,6 +33,10 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 exports.getProduct = asyncHandler(async (req, res, next) => {
   const { slug } = req.params;
   const item = await Product.find({ slug });
+  console.log(item);
+  if (!item.length) {
+    return next(new httpError('No Item found', 404));
+  }
   res.status(200).json(item[0]);
 });
 //#endregion
