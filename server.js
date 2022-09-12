@@ -45,6 +45,7 @@ connectDB();
 
 app.use('/api/v1/auth', require('./routes/auth-routes'));
 app.use('/api/v1/slider', require('./routes/slider-routes'));
+app.use('/api/v1/product', require('./routes/product-routes'));
 
 //#endregion
 
