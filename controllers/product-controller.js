@@ -40,14 +40,3 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
   res.status(200).json(item[0]);
 });
 //#endregion
-
-// //#region ~ PUT - /api/v1/slider/:sliderId - Upload a slider - Private
-// exports.changeActiveStatus = asyncHandler(async (req, res, next) => {
-//   let { active } = req.body;
-//   let { sliderId } = req.params;
-//   const sliderItem = await SliderItem.findById(sliderId);
-//   sliderItem.active = active;
-//   sliderItem.save();
-//   return res.status(201).json({ item: sliderItem.toObject({ getters: true }) });
-// });
-// //#endregion
