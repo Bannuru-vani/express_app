@@ -30,6 +30,9 @@ const ProductSchema = mongoose.Schema({
   color: {
     type: Array,
   },
+  rating: {
+    type: Number,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -36,7 +36,7 @@ app.use(helmet());
 app.use(mongoSanitize());
 
 //#region ~ ENV CONFIG ~
-// require('dotenv').config({ path: './config/.env' });
+require('dotenv').config({ path: './config/.env' });
 //#endregion
 
 connectDB();
@@ -46,6 +46,7 @@ connectDB();
 app.use('/api/v1/auth', require('./routes/auth-routes'));
 app.use('/api/v1/slider', require('./routes/slider-routes'));
 app.use('/api/v1/product', require('./routes/product-routes'));
+app.use('/api/v1/cart', require('./routes/cart-routes'));
 
 //#endregion
 
