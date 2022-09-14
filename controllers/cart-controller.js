@@ -13,14 +13,13 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
   }
 
   // TODO: Need to check if cart is already exists with this customer and need to add a new item and update the existing product
-  let cart = await Cart.find({ userId });
-
+  let cart = await Cart.findOne({ userId });
   if (!cart) {
     const cartData = {
       userId: req.user._id,
       items: [
         {
-          productId: productId,
+          product: productId,
           quantity: quantity,
           total: parseInt(productDetails.price * quantity),
           price: productDetails.price,
@@ -32,10 +31,15 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
     await Cart.create(cartData);
   } else {
     let productIndex = cart.items.findIndex(
-      item => item.productId === productId
+      item => item.product.toString() === productId
     );
 
-    if (productIndex) {
+    console.log(cart.items, productIndex);
+
+    // cart.items.map(item =>
+    //   console.log(item.productId.toString() === productId)
+    // );
+    if (productIndex > -1) {
       cart.items[productIndex].quantity = quantity;
       cart.items[productIndex].total = quantity * productDetails.price;
       cart.subTotal = cart.items
@@ -43,7 +47,7 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
         .reduce((acc, next) => acc + next);
     } else {
       cart.items.push({
-        productId: productId,
+        product: productId,
         quantity: quantity,
         total: parseInt(productDetails.price * quantity),
         price: productDetails.price,
@@ -52,10 +56,22 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
         .map(item => item.total)
         .reduce((acc, next) => acc + next);
     }
+    cart.save();
   }
 
   return res
     .status(201)
     .json({ message: `${productDetails.name} is added to cart!` });
+});
+//#endregion
+
+//#region ~ GET - /api/v1/products - GET PRODUCTS - PRIVATE
+exports.getCart = asyncHandler(async (req, res, next) => {
+  let userId = req.user._id;
+  const cart = await Cart.findOne({ userId }).populate('items.product');
+  if (!cart || !Object.keys(cart).length) {
+    return next(new httpError('Cart is empty', 404));
+  }
+  res.status(200).json(cart);
 });
 //#endregion
