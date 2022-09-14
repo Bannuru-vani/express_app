@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   // The headers which you use from front-end
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Origin, Contrnt-Type,Accept',
+    'Origin, Contrnt-Type ,Accept',
     'Authorization'
   );
   // Methods you use to contact with Backend
@@ -36,7 +36,7 @@ app.use(helmet());
 app.use(mongoSanitize());
 
 //#region ~ ENV CONFIG ~
-require('dotenv').config({ path: './config/.env' });
+// require('dotenv').config({ path: './config/.env' });
 //#endregion
 
 connectDB();

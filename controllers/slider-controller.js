@@ -16,7 +16,7 @@ exports.addSlider = asyncHandler(async (req, res, next) => {
 });
 //#endregion
 
-//#region ~ GET - /api/v1/slider - GET USER(info of logged in user) - PRIVATE
+//#region ~ GET - /api/v1/slider - GET USER(info of logged in user) - Private
 exports.getSliders = asyncHandler(async (req, res, next) => {
   const items = await SliderItem.find();
   res.status(200).json(items);
