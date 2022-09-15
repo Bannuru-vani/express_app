@@ -34,8 +34,6 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
       item => item.product.toString() === productId
     );
 
-    console.log(cart.items, productIndex);
-
     // cart.items.map(item =>
     //   console.log(item.productId.toString() === productId)
     // );
