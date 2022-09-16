@@ -6,6 +6,10 @@ const httpError = require('../utils/httpError');
 //#region ~ POST - /api/v1/cart - Add item to cart - Private
 exports.addToCart = asyncHandler(async (req, res, next) => {
   let { productId, quantity } = req.body;
+
+  if (!quantity) {
+    return next(new httpError('quantity has to be more than one', 400));
+  }
   let userId = req.user._id;
   let productDetails = await Product.findById(productId);
   if (!productDetails) {
