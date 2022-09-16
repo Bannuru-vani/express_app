@@ -37,6 +37,7 @@ app.use(mongoSanitize());
 
 //#region ~ ENV CONFIG ~
 // require('dotenv').config({ path: './config/.env' });
+
 //#endregion
 
 connectDB();
