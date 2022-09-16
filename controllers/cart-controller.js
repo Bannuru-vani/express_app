@@ -73,3 +73,12 @@ exports.getCart = asyncHandler(async (req, res, next) => {
   res.status(200).json(cart);
 });
 //#endregion
+
+//#region ~ GET - /api/v1/cart/count - GET PRODUCTS COUNT - PRIVATE
+exports.getCartCount = asyncHandler(async (req, res, next) => {
+  let userId = req.user._id;
+  const cart = await Cart.findOne({ userId });
+  let cartCount = cart.items.length;
+  res.status(200).json({ cartCount });
+});
+//#endregion
