@@ -66,17 +66,20 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
 });
 //#endregion
 
-//#region ~ DELETE - /api/v1/cart - DELETE CART - PRIVATE
+//#region ~ DELETE - /api/v1/cart/deleteSignleItem- DELETE FROM CART - PRIVATE
 exports.deleteFromCart = asyncHandler(async (req, res, next) => {
   let userId = req.user._id;
   let productID = req.body.productID;
   let cart = await Cart.findOne({ userId });
-
   if (!cart) {
     return next(new httpError('Bad request!', 400));
   }
-
-  res.status(200).json({ message: `Cart deleted` });
+  let cartItems = cart.items.filter(
+    item => item.product.toString() !== productID
+  );
+  cart.items = [...cartItems];
+  await cart.save();
+  res.status(200).json({ message: `Item deleted from cart` });
 });
 //#endregion
 
@@ -93,7 +96,7 @@ exports.getCart = asyncHandler(async (req, res, next) => {
   let userId = req.user._id;
   const cart = await Cart.findOne({ userId }).populate('items.product');
   if (!cart || !Object.keys(cart).length) {
-    return next(new httpError('Cart is empty', 404));
+    return res.status(200).json({ message: 'Cart is empty' });
   }
   res.status(200).json(cart);
 });
