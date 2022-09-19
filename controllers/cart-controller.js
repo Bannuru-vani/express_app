@@ -82,8 +82,10 @@ exports.getCart = asyncHandler(async (req, res, next) => {
 exports.getCartCount = asyncHandler(async (req, res, next) => {
   let userId = req.user._id;
   const cart = await Cart.findOne({ userId });
+  if (!cart || !Object.keys(cart).length) {
+    return res.status(200).json({ cartCount: 0 });
+  }
   let cartCount = cart.items?.length || 0;
-
   res.status(200).json({ cartCount });
 });
 //#endregion
