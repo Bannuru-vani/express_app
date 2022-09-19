@@ -16,7 +16,6 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
     return next(new httpError('Product not found', 400));
   }
 
-  // TODO: Need to check if cart is already exists with this customer and need to add a new item and update the existing product
   let cart = await Cart.findOne({ userId });
   if (!cart) {
     const cartData = {
@@ -64,6 +63,28 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
   return res
     .status(201)
     .json({ message: `${productDetails.name} is added to cart!` });
+});
+//#endregion
+
+//#region ~ DELETE - /api/v1/cart - DELETE CART - PRIVATE
+exports.deleteFromCart = asyncHandler(async (req, res, next) => {
+  let userId = req.user._id;
+  let productID = req.body.productID;
+  let cart = await Cart.findOne({ userId });
+
+  if (!cart) {
+    return next(new httpError('Bad request!', 400));
+  }
+
+  res.status(200).json({ message: `Cart deleted` });
+});
+//#endregion
+
+//#region ~ DELETE - /api/v1/cart - DELETE CART - PRIVATE
+exports.deleteAll = asyncHandler(async (req, res, next) => {
+  let userId = req.user._id;
+  let cart = await Cart.deleteOne({ userId });
+  res.status(200).json({ message: `Cart deleted` });
 });
 //#endregion
 
