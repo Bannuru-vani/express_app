@@ -69,11 +69,12 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
 //#region ~ DELETE - /api/v1/cart/deleteSignleItem- DELETE FROM CART - PRIVATE
 exports.deleteFromCart = asyncHandler(async (req, res, next) => {
   let userId = req.user._id;
-  let productID = req.body.productID;
+  let productID = req.params.productID;
   let cart = await Cart.findOne({ userId });
   if (!cart) {
     return next(new httpError('Bad request!', 400));
   }
+  // TODO: if the item is already deleted give some different message to user
   let cartItems = cart.items.filter(
     item => item.product.toString() !== productID
   );
