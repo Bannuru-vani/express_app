@@ -7,7 +7,7 @@ const httpError = require('../utils/httpError');
 exports.addToCart = asyncHandler(async (req, res, next) => {
   let { productId, quantity } = req.body;
 
-  if (!quantity) {
+  if (!quantity || quantity === '0') {
     return next(new httpError('quantity has to be more than one', 400));
   }
   let userId = req.user._id;
