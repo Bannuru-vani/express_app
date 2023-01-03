@@ -112,6 +112,16 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
   return res.status(201).json({ success: true, data: 'Password Changed' });
 });
 
+exports.searchUser = asyncHandler(async (req, res, next) => {
+  const { search } = req.query;
+  console.log(search);
+  const user = await User.find({
+    user: { $regex: search, $options: 'i' },
+  }).select('user _id email');
+
+  return res.status(200).json({ success: true, data: user });
+});
+
 //#region ~ Util function to get token from model, and send token response
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();

@@ -30,6 +30,7 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.11",
+    "socket.io": "^4.5.1",
     "nodemailer": "^6.7.8",
     "nodemailer-smtp-transport": "^2.7.4",
     "xss-clean": "^0.1.1"
