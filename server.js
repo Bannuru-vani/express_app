@@ -48,45 +48,45 @@ connectDB();
 
 //#region ~ Routes ~
 
-socketIO.on('connection', socket => {
-  //connected to correct id
-  console.log('connected');
-  socket.on('setup', userData => {
-    socket.join(userData._id);
+// socketIO.on('connection', socket => {
+//   //connected to correct id
+//   console.log('connected');
+//   socket.on('setup', userData => {
+//     socket.join(userData._id);
 
-    socket.emit('connected');
-  });
+//     socket.emit('connected');
+//   });
 
-  socket.on('join-chat', room => {
-    socket.join(room);
-  });
+//   socket.on('join-chat', room => {
+//     socket.join(room);
+//   });
 
-  socket.on('typing', room => socket.in(room).emit('typing'));
-  socket.on('stop-typing', room => socket.in(room).emit('stop-typing'));
+//   socket.on('typing', room => socket.in(room).emit('typing'));
+//   socket.on('stop-typing', room => socket.in(room).emit('stop-typing'));
 
-  socket.on('new-message', newMessageReceived => {
-    let chat = newMessageReceived.chat;
+//   socket.on('new-message', newMessageReceived => {
+//     let chat = newMessageReceived.chat;
 
-    if (!chat.users) return console.log(`chat.users not defined`);
+//     if (!chat.users) return console.log(`chat.users not defined`);
 
-    chat.users.forEach(user => {
-      if (user._id === newMessageReceived.sender._id) return;
+//     chat.users.forEach(user => {
+//       if (user._id === newMessageReceived.sender._id) return;
 
-      socket.in(user._id).emit('message-received', newMessageReceived);
-    });
-  });
+//       socket.in(user._id).emit('message-received', newMessageReceived);
+//     });
+//   });
 
-  socket.off('setup', () => {
-    socket.leave(userData._id);
-  });
-});
+//   socket.off('setup', () => {
+//     socket.leave(userData._id);
+//   });
+// });
 
 app.use('/api/v1/auth', require('./routes/auth-routes'));
 app.use('/api/v1/slider', require('./routes/slider-routes'));
 app.use('/api/v1/product', require('./routes/product-routes'));
 app.use('/api/v1/cart', require('./routes/cart-routes'));
-app.use('/api/v1/chat', require('./routes/chat-routes'));
-app.use('/api/v1/message', require('./routes/message-routes'));
+// app.use('/api/v1/chat', require('./routes/chat-routes'));
+// app.use('/api/v1/message', require('./routes/message-routes'));
 //#endregion
 
 //#region ~ 404 - NO PAGE/ROUTE FOUND ~
